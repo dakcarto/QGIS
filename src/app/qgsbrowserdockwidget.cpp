@@ -19,6 +19,7 @@
 #include <QMenu>
 #include <QSettings>
 #include <QToolButton>
+#include <QFileInfo>
 
 #include "qgsbrowsermodel.h"
 #include "qgsdataitem.h"
@@ -296,6 +297,14 @@ void QgsBrowserDockWidget::addLayer( QgsLayerItem *layerItem )
   QString uri = layerItem->uri();
   if ( uri.isEmpty() )
     return;
+
+  QFileInfo fileInfo = QFileInfo( uri );
+  if (( fileInfo.exists() && fileInfo.isFile() ) ||
+      uri.startsWith( "/vsi", Qt::CaseInsensitive ) )
+  {
+    QgisApp::instance()->openFile( uri );
+    return;
+  }
 
   QgsMapLayer::LayerType type = layerItem->mapLayerType();
   QString providerKey = layerItem->providerKey();

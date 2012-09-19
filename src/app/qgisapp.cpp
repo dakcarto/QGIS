@@ -798,7 +798,11 @@ void QgisApp::dropEvent( QDropEvent *event )
     QgsMimeDataUtils::UriList lst = QgsMimeDataUtils::decodeUriList( event->mimeData() );
     foreach ( const QgsMimeDataUtils::Uri& u, lst )
     {
-      if ( u.layerType == "vector" )
+      if ( u.uri.startsWith( "/vsi", Qt::CaseInsensitive ) )
+      {
+        openFile( u.uri );
+      }
+      else if ( u.layerType == "vector" )
       {
         addVectorLayer( u.uri, u.name, u.providerKey );
       }

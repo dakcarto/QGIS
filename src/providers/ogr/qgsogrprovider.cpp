@@ -1792,8 +1792,8 @@ QString createFilters( QString type )
     QSettings settings;
     if ( settings.value( "/qgis/scanZipInBrowser", "basic" ).toString() != "no" )
     {
-      myFileFilters += createFileFilter_( QObject::tr( "GDAL/OGR VSIFileHandler" ), "*.zip *.gz *.tar *.tar.gz *.tgz" );
-      myExtensions << "zip" << "gz" << "tar" << "tar.gz" << "tgz";
+      myFileFilters += createFileFilter_( QObject::tr( "GDAL/OGR VSIFileHandler" ), "*.zip *.gz *.tar *.tar.gz *.tgz *.kmz" );
+      myExtensions << "zip" << "gz" << "tar" << "tar.gz" << "tgz" << "kmz";
 
     }
 #endif

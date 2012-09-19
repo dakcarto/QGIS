@@ -939,7 +939,8 @@ QVector<QgsDataItem*> QgsZipItem::createChildren( )
 QString QgsZipItem::vsiPrefix( QString path )
 {
   if ( path.startsWith( "/vsizip/", Qt::CaseInsensitive ) ||
-       path.endsWith( ".zip", Qt::CaseInsensitive ) )
+       path.endsWith( ".zip", Qt::CaseInsensitive ) ||
+       path.endsWith( ".kmz", Qt::CaseInsensitive ))
     return "/vsizip/";
   else if ( path.startsWith( "/vsitar/", Qt::CaseInsensitive ) ||
             path.endsWith( ".tar", Qt::CaseInsensitive ) ||
@@ -992,6 +993,7 @@ QgsDataItem* QgsZipItem::itemFromPath( QgsDataItem* parent, QString path, QStrin
 
     // first get list of files inside .zip or .tar files
     if ( path.endsWith( ".zip", Qt::CaseInsensitive ) ||
+         path.endsWith( ".kmz", Qt::CaseInsensitive ) ||
          path.endsWith( ".tar", Qt::CaseInsensitive ) )
     {
       zipFileList = zipItem->getZipFileList();
