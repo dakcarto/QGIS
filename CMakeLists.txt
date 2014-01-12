@@ -427,8 +427,9 @@ ELSE (WIN32)
     ELSE ()
         SET (OSX_HAVE_LOADERPATH 0)
     ENDIF ()
-    #this will define ${APP_SERVICES_LIBRARY}
+    #this will define ${APP_SERVICES_LIBRARY} and ${APP_KIT_LIBRARY}
     FIND_LIBRARY(APP_SERVICES_LIBRARY ApplicationServices )
+    FIND_LIBRARY(APP_KIT_LIBRARY AppKit ) # via new Cocoa interface
 
     SET (DEFAULT_BIN_SUBDIR      bin)
     SET (QGIS_BIN_SUBDIR_REV     ..)

@@ -298,6 +298,28 @@ SET (QGIS_APP_MOC_HDRS
   qgsnewspatialitelayerdialog.h
   )
 
+IF(APPLE)
+  SET(QGIS_APP_OBJC_SRCS
+    ../native/mac/cocoainitializer.mm
+    ../native/mac/qgsmacappkit.mm
+  )
+
+  SET_SOURCE_FILES_PROPERTIES(${QGIS_APP_OBJC_SRCS} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+
+  SET(QGIS_APP_SRCS
+    ${QGIS_APP_SRCS}
+    ${QGIS_APP_OBJC_SRCS}
+    ../native/mac/qgsmacnative.cpp
+  )
+
+  SET (QGIS_APP_MOC_HDRS
+    ${QGIS_APP_MOC_HDRS}
+    ../native/mac/qgsmacnative.h
+    ../native/mac/cocoainitializer.h
+    ../native/mac/qgsmacappkit.h
+  )
+ENDIF(APPLE)
+
 IF(WITH_INTERNAL_QWTPOLAR)
   IF(QWT_VERSION_STR VERSION_LESS "6.0.0")
     SET(QGIS_APP_SRCS
@@ -429,6 +451,7 @@ INCLUDE_DIRECTORIES(
   ../core/gps
   ../core/composer ../core/dxf ../core/raster ../core/symbology-ng
   ../gui ../gui/symbology-ng ../gui/attributetable ../gui/raster ../gui/editorwidgets ../gui/editorwidgets/core
+  ../native/mac
   ../plugins
   ../python
   gps
@@ -493,6 +516,7 @@ TARGET_LINK_LIBRARIES(qgis_app
 
 IF (APPLE)
   TARGET_LINK_LIBRARIES(qgis_app ${APP_SERVICES_LIBRARY})
+  TARGET_LINK_LIBRARIES(qgis_app ${APP_KIT_LIBRARY})
 ENDIF(APPLE)
 
 if(MSVC AND CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -525,6 +549,7 @@ ENDIF(WIN32)
 
 IF (APPLE)
   TARGET_LINK_LIBRARIES(${QGIS_APP_NAME} ${APP_SERVICES_LIBRARY} )
+  TARGET_LINK_LIBRARIES(${QGIS_APP_NAME} ${APP_KIT_LIBRARY})
 
   SET_TARGET_PROPERTIES(${QGIS_APP_NAME} PROPERTIES
     INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/${QGIS_LIB_DIR}

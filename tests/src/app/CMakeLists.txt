@@ -80,6 +80,7 @@ MACRO (ADD_QGIS_TEST testname testsrc)
   ENDIF(WIN32)
   IF (APPLE)
     TARGET_LINK_LIBRARIES(qgis_${testname} ${APP_SERVICES_LIBRARY} )
+#    TARGET_LINK_LIBRARIES(qgis_${testname} ${APP_KIT_LIBRARY})
   ENDIF(APPLE)
   ADD_TEST(qgis_${testname} ${CMAKE_CURRENT_BINARY_DIR}/../../../output/bin/qgis_${testname})
   #SET_TARGET_PROPERTIES(qgis_${testname} PROPERTIES

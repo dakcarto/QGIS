@@ -82,6 +82,8 @@
 //
 #ifdef Q_OS_MACX
 #include <ApplicationServices/ApplicationServices.h>
+#include "cocoainitializer.h"
+#include "qgsmacappkit.h"
 
 // check macro breaks QItemDelegate
 #ifdef check
@@ -4140,9 +4142,10 @@ void QgisApp::bringAllToFront()
 {
 #ifdef Q_WS_MAC
   // Bring forward all open windows while maintaining layering order
-  ProcessSerialNumber psn;
-  GetCurrentProcess( &psn );
-  SetFrontProcess( &psn );
+  // method valid for Mac OS X >= 10.6
+  QgsMacAppKit *macapp = new QgsMacAppKit();
+  macapp->activateIgnoringOtherApps();
+  delete macapp;
 #endif
 }
 
