@@ -4,13 +4,14 @@
 
 #include "qgsmacnative.h"
 
-class QgsMacAppKit : public QgsMacNative
+class QgsNSRunningApplication : public QgsMacAppKit
 {
 	public:
-    QgsMacAppKit();
-    ~QgsMacAppKit();
+    QgsNSRunningApplication();
+    ~QgsNSRunningApplication();
 
-    void activateIgnoringOtherApps();
+    const char* currentAppLocalizedName();
+    void currentAppActivateIgnoringOtherApps();
 	
 	private:
 		class Private;

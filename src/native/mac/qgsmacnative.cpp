@@ -1,5 +1,5 @@
 #include "qgsmacnative.h"
 
-QgsMacNative::~QgsMacNative()
+QgsMacAppKit::~QgsMacAppKit()
 {
 }

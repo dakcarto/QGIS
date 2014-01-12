@@ -3,27 +3,32 @@
 
 #include <Cocoa/Cocoa.h>
 
-class QgsMacAppKit::Private
+class QgsNSRunningApplication::Private
 {
   public:
 //    NSObject *obj;
 };
 
-QgsMacAppKit::QgsMacAppKit()
+QgsNSRunningApplication::QgsNSRunningApplication()
 {
 //  d = new Private;
 //  d->obj = [NSObject someFunction];
 }
 
-QgsMacAppKit::~QgsMacAppKit()
+QgsNSRunningApplication::~QgsNSRunningApplication()
 {
 //  [d->obj release];
 //  delete d;
+//  d = 0;
 }
 
-void QgsMacAppKit::activateIgnoringOtherApps()
+const char* QgsNSRunningApplication::currentAppLocalizedName()
 {
-  // NSLog(@"%@", [[NSRunningApplication currentApplication] localizedName]);
+  return [[[NSRunningApplication currentApplication] localizedName] UTF8String];
+}
+
+void QgsNSRunningApplication::currentAppActivateIgnoringOtherApps()
+{
   // valid for Mac OS X >= 10.6
   [[NSRunningApplication currentApplication] activateWithOptions:
     (NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];

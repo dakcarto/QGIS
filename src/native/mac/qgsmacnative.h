@@ -1,14 +1,14 @@
-#ifndef QGSMAC_H
-#define QGSMAC_H
+#ifndef QGSMACNATIVE_H
+#define QGSMACNATIVE_H
 
-class QgsMacNative
+class QgsMacAppKit
 {
   public:
-    virtual ~QgsMacNative();
+    virtual ~QgsMacAppKit();
 
-    // QgsNsApplication interface
-
-    virtual void activateIgnoringOtherApps() = 0;
+    // NSRunningApplication interface
+    virtual const char* currentAppLocalizedName() = 0;
+    virtual void currentAppActivateIgnoringOtherApps() = 0;
 };
 
-#endif // QGSMAC_H
+#endif // QGSMACNATIVE_H

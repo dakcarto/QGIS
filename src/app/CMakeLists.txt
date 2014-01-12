@@ -312,8 +312,8 @@ IF(APPLE)
     ../native/mac/qgsmacnative.cpp
   )
 
-  SET (QGIS_APP_MOC_HDRS
-    ${QGIS_APP_MOC_HDRS}
+  SET (QGIS_APP_HDRS
+    ${QGIS_APP_HDRS}
     ../native/mac/qgsmacnative.h
     ../native/mac/cocoainitializer.h
     ../native/mac/qgsmacappkit.h

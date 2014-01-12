@@ -82,6 +82,8 @@
 //
 #ifdef Q_OS_MACX
 #include <ApplicationServices/ApplicationServices.h>
+
+// Virtual interfaces to Cocoa objective-c frameworks/classes/calls
 #include "cocoainitializer.h"
 #include "qgsmacappkit.h"
 
@@ -4143,9 +4145,11 @@ void QgisApp::bringAllToFront()
 #ifdef Q_WS_MAC
   // Bring forward all open windows while maintaining layering order
   // method valid for Mac OS X >= 10.6
-  QgsMacAppKit *macapp = new QgsMacAppKit();
-  macapp->activateIgnoringOtherApps();
-  delete macapp;
+  QgsNSRunningApplication* nsrapp = new QgsNSRunningApplication();
+  const char* nsrapp_name = nsrapp->currentAppLocalizedName();
+  QgsDebugMsg( QString( "Current NSRunningApplication: %1" ).arg( nsrapp_name ) );
+  nsrapp->currentAppActivateIgnoringOtherApps();
+  delete nsrapp;
 #endif
 }
 
