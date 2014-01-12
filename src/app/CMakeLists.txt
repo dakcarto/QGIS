@@ -298,28 +298,6 @@ SET (QGIS_APP_MOC_HDRS
   qgsnewspatialitelayerdialog.h
   )
 
-IF(APPLE)
-  SET(QGIS_APP_OBJC_SRCS
-    ../native/mac/cocoainitializer.mm
-    ../native/mac/qgsmacappkit.mm
-  )
-
-  SET_SOURCE_FILES_PROPERTIES(${QGIS_APP_OBJC_SRCS} PROPERTIES COMPILE_FLAGS "-x objective-c++")
-
-  SET(QGIS_APP_SRCS
-    ${QGIS_APP_SRCS}
-    ${QGIS_APP_OBJC_SRCS}
-    ../native/mac/qgsmacnative.cpp
-  )
-
-  SET (QGIS_APP_HDRS
-    ${QGIS_APP_HDRS}
-    ../native/mac/qgsmacnative.h
-    ../native/mac/cocoainitializer.h
-    ../native/mac/qgsmacappkit.h
-  )
-ENDIF(APPLE)
-
 IF(WITH_INTERNAL_QWTPOLAR)
   IF(QWT_VERSION_STR VERSION_LESS "6.0.0")
     SET(QGIS_APP_SRCS
@@ -451,7 +429,6 @@ INCLUDE_DIRECTORIES(
   ../core/gps
   ../core/composer ../core/dxf ../core/raster ../core/symbology-ng
   ../gui ../gui/symbology-ng ../gui/attributetable ../gui/raster ../gui/editorwidgets ../gui/editorwidgets/core
-  ../native/mac
   ../plugins
   ../python
   gps

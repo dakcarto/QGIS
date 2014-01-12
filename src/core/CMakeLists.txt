@@ -298,6 +298,20 @@ ADD_FLEX_FILES(QGIS_CORE_SRCS qgsexpressionlexer.ll)
 
 ADD_BISON_FILES(QGIS_CORE_SRCS qgsexpressionparser.yy)
 
+IF(APPLE)
+  SET(QGIS_APP_OBJC_SRCS
+    native/mac/cocoainitializer.mm
+    native/mac/qgsmacappkit.mm
+  )
+
+  SET_SOURCE_FILES_PROPERTIES(${QGIS_APP_OBJC_SRCS} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+
+  SET(QGIS_CORE_SRCS ${QGIS_CORE_SRCS}
+    ${QGIS_APP_OBJC_SRCS}
+    native/mac/qgsmacnative.cpp
+  )
+ENDIF(APPLE)
+
 SET(QGIS_CORE_MOC_HDRS
   qgsapplication.h
   qgsbrowsermodel.h
@@ -559,6 +573,14 @@ IF (QT_MOBILITY_LOCATION_FOUND)
   )
 ENDIF (QT_MOBILITY_LOCATION_FOUND)
 
+IF(APPLE)
+  SET (QGIS_CORE_HDRS ${QGIS_CORE_HDRS}
+    native/mac/qgsmacnative.h
+    native/mac/cocoainitializer.h
+    native/mac/qgsmacappkit.h
+  )
+ENDIF(APPLE)
+
 INCLUDE_DIRECTORIES(
   ${CMAKE_CURRENT_SOURCE_DIR}
   composer
@@ -579,6 +601,10 @@ IF (NOT WITH_INTERNAL_SPATIALITE)
   INCLUDE_DIRECTORIES(${SQLITE3_INCLUDE_DIR})
   INCLUDE_DIRECTORIES(${SPATIALITE_INCLUDE_DIR})
 ENDIF (NOT WITH_INTERNAL_SPATIALITE)
+
+IF(APPLE)
+  INCLUDE_DIRECTORIES(native/mac)
+ENDIF(APPLE)
 
 IF (WIN32)
   IF (MSVC)
@@ -637,7 +663,7 @@ IF (WIN32)
 ENDIF (WIN32)
 
 IF(APPLE)
-  TARGET_LINK_LIBRARIES(qgis_core "-framework CoreFoundation -framework IOKit")
+  TARGET_LINK_LIBRARIES(qgis_core "-framework CoreFoundation -framework IOKit -framework AppKit")
 ENDIF(APPLE)
 
 IF (NOT WITH_INTERNAL_QEXTSERIALPORT)

@@ -84,8 +84,8 @@
 #include <ApplicationServices/ApplicationServices.h>
 
 // Virtual interfaces to Cocoa objective-c frameworks/classes/calls
-#include "cocoainitializer.h"
-#include "qgsmacappkit.h"
+#include "native/mac/cocoainitializer.h"
+#include "native/mac/qgsmacappkit.h"
 
 // check macro breaks QItemDelegate
 #ifdef check
