@@ -80,7 +80,7 @@ FUNCTION (COPY_FRAMEWORK FWPREFIX FWNAME FWDEST)
         ENDIF (IS_DIRECTORY "${FWPREFIX}/${FWNAME}.framework/Versions/${FWVER}/Resources")
         # ensure writable by user, e.g. Homebrew frameworks are installed non-writable
         EXECUTE_PROCESS (COMMAND chmod -R u+w "${FWDEST}/${FWNAME}.framework")
-        EXECUTE_PROCESS (COMMAND install_name_tool -id "${ATEXECUTABLE}/${QGIS_FW_SUBDIR}/${FWNAME}" "${FWDEST}/${FWNAME}.framework/${FWNAME}")
+        EXECUTE_PROCESS (COMMAND install_name_tool -id "${ATEXECUTABLE}/${QGIS_FW_SUBDIR}/${FWNAME}.framework/Versions/${FWVER}/${FWNAME}" "${FWDEST}/${FWNAME}.framework/${FWNAME}")
         # debug variants
         SET (FWD "${FWNAME}_debug")
         IF ("${FWDEBUG}" STREQUAL "Debug" AND EXISTS "${FWPREFIX}/${FWNAME}.framework/Versions/${FWVER}/${FWD}")
