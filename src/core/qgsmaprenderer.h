@@ -312,6 +312,10 @@ class CORE_EXPORT QgsMapRenderer : public QObject
     //! @note added in 2.4
     const QgsMapSettings& mapSettings();
 
+    //! Apply QgsMapSettings
+    //! @note added in 2.4
+    void applyMapSettings( const QgsMapSettings& ms );
+
   signals:
 
     //! @deprecated in 2.4 - not emitted anymore

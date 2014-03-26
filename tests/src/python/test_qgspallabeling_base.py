@@ -333,12 +333,13 @@ class TestQgsPalLabeling(TestCase):
             r.setLabelingEngine(pal)
 
             # this seems too redundant
-            r.setOutputSize(ms.outputSize(), ms.outputDpi())
-            r.setMapUnits(ms.mapUnits())
-            r.setExtent(ms.extent())
-            r.setProjectionsEnabled(ms.hasCrsTransformEnabled())
-            r.setDestinationCrs(ms.destinationCrs())
-            r.setLayerSet(ms.layers())
+            r.applyMapSettings(ms)
+            # r.setOutputSize(ms.outputSize(), ms.outputDpi())
+            # r.setMapUnits(ms.mapUnits())
+            # r.setExtent(ms.extent())
+            # r.setProjectionsEnabled(ms.hasCrsTransformEnabled())
+            # r.setDestinationCrs(ms.destinationCrs())
+            # r.setLayerSet(ms.layers())
 
             ctx = r.rendererContext()
             ctx.setDrawEditingInformation(

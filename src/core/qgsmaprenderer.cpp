@@ -1192,6 +1192,19 @@ const QgsMapSettings& QgsMapRenderer::mapSettings()
   return mMapSettings;
 }
 
+void QgsMapRenderer::applyMapSettings( const QgsMapSettings& ms )
+{
+  if ( !ms.hasValidSettings() )
+    return;
+
+  setMapUnits( ms.mapUnits() );
+  setExtent( ms.extent() );
+  setDestinationCrs( ms.destinationCrs() );
+  setOutputSize( ms.outputSize(), ms.outputDpi() );
+  setProjectionsEnabled( ms.hasCrsTransformEnabled() );
+  setLayerSet( ms.layers() );
+}
+
 void QgsMapRenderer::addLayerCoordinateTransform( const QString& layerId, const QString& srcAuthId, const QString& destAuthId, int srcDatumTransform, int destDatumTransform )
 {
   QgsLayerCoordinateTransform lt;

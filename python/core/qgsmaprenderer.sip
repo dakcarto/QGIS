@@ -268,6 +268,10 @@ class QgsMapRenderer : QObject
     //! @note added in 2.4
     const QgsMapSettings& mapSettings();
 
+    //! Apply QgsMapSettings
+    //! @note added in 2.4
+    void applyMapSettings( const QgsMapSettings& ms );
+
     void addLayerCoordinateTransform( const QString& layerId, const QString& srcAuthId, const QString& destAuthId, int srcDatumTransform = -1, int destDatumTransform = -1 );
     void clearLayerCoordinateTransforms();
 
