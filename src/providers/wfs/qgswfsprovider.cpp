@@ -1101,7 +1101,7 @@ bool QgsWFSProvider::describeFeatureType( QString& geometryAttribute, QgsFields&
 {
   fields.clear();
 
-  QgsWFSDescribeFeatureType describeFeatureType( mShared->mURI.uri( false ) );
+  QgsWFSDescribeFeatureType describeFeatureType( mShared->mURI.uri() );
   if ( !describeFeatureType.requestFeatureType( mShared->mWFSVersion,
        mShared->mURI.typeName() ) )
   {
@@ -1330,7 +1330,7 @@ bool QgsWFSProvider::sendTransactionDocument( const QDomDocument& doc, QDomDocum
     return false;
   }
 
-  QgsWFSTransactionRequest request( mShared->mURI.uri( false ) );
+  QgsWFSTransactionRequest request( mShared->mURI.uri() );
   return request.send( doc, serverResponse );
 }
 
@@ -1433,7 +1433,7 @@ bool QgsWFSProvider::getCapabilities()
 
   if ( mShared->mCaps.version.isEmpty() )
   {
-    QgsWFSCapabilities getCapabilities( mShared->mURI.uri( false ) );
+    QgsWFSCapabilities getCapabilities( mShared->mURI.uri() );
     if ( !getCapabilities.requestCapabilities( true ) )
     {
       QgsMessageLog::logMessage( tr( "GetCapabilities failed for url %1: %2" ).
